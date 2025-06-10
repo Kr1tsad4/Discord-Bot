@@ -8,17 +8,16 @@ module.exports = async (client) => {
     for (const [key, value] of Object.entries(tags)) {
       const { keywords, tagIds, tagMessage } = value;
 
-      const matched = keywords?.some((keyword) =>
+      const matchedKeyword = keywords?.some((keyword) =>
         keyword === "val" || keyword === "dl"
           ? content.startsWith(keyword.toLowerCase())
           : content === keyword.toLowerCase()
       );
 
-      if (matched) {
+      if (matchedKeyword) {
         const mentions = tagIds.map((id) => `<@${id}>`).join(" ");
         await message.channel.sendTyping();
-
-        if (key.startsWith("val") || key.startsWith("dl")) {
+        if (content.startsWith("val") || content.startsWith("dl")) {
           const numberString = message.content.slice(key.length).trim();
           const numberToInvite = Number(numberString);
 

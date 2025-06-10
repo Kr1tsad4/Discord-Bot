@@ -18,36 +18,6 @@ module.exports = async (client) => {
       return;
     }
 
-    for (const [key, value] of Object.entries(tags)) {
-      const { keywords, tagIds, tagMessage } = value;
-
-      const matchedKeyword = keywords?.find(keyword => 
-        content.startsWith(keyword.toLowerCase())
-      );
-
-      if (matchedKeyword) {
-        const mentions = tagIds.map((id) => `<@${id}>`).join(" ");
-        await message.channel.sendTyping();
-
-        if (key.startsWith("val")) {
-          const numberString = message.content.slice(matchedKeyword.length).trim();
-          const numberToInviteVal = Number(numberString);
-
-          if (
-            !numberString ||
-            isNaN(numberToInviteVal) ||
-            numberToInviteVal <= 0
-          ) {
-            await message.channel.send(`${mentions} ${tagMessage}4`);
-          } else {
-            await message.channel.send(
-              `${mentions} ${tagMessage}${Math.round(numberToInviteVal)}`
-            );
-          }
-        } 
-        break;
-      }
-    }
   });
 
   const getUserDisplayName = (userId) => {
