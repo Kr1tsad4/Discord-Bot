@@ -1,4 +1,4 @@
-const channels = require('../../.../../../../../data/channels.json')
+const channels = require('../../../../../../../data/channels.json')
 module.exports = (client) => {
   client.on("messageDelete", (deletedMessage) => {
     const deletedContent = deletedMessage.content;
